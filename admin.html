@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD Product Management</title>
+    <link  href="adminStyle.css" rel="stylesheet">
+</head>
+<body>
+
+    <div class="container">
+        <h2>Category MANAGEMENT SYSTEM</h2>
+
+        <form class="form-group">
+            <input type="text" placeholder="Enter category name" id="catName">
+            <input type="hidden" id="catId">
+            <input type="hidden" id="oldCatName">
+            <button type="submit" id="subBtn">Add category</button>  
+        </form>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Category name</th>
+                    <th>Update</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody id="tbody">
+            </tbody>
+        </table>
+    </div>
+    <script type="module" src="addCat.js"></script>
+</body>
+</html>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/4436/4436481.png" type="image/x-icon">
+    <title>ContentPage</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #001845;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        #contentPageDiv {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: #fff;
+            width: 80%;
+            max-width: 1200px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        #imgContainer {
+            width: 100%;
+            height: 300px;
+            overflow: hidden;
+            position: relative;
+            border-radius: 15px 15px 0 0;
+        }
+
+        #imgContainer img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        #cInfo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+            padding: 10px;
+        }
+
+        #fgImg {
+            width: 200px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        #cInfoTxt {
+            display: flex;
+            flex-direction: column;
+            max-width: 800px;
+            margin-bottom: 1px;
+
+            text-align: center;
+
+        }
+
+        #cTitle {
+            font-size: 28px;
+            color: #1c1b1b;
+            margin-bottom: 1px;
+            text-align: center;
+        }
+
+        #progress {
+            font-size: 18px;
+            color: #291f8e;
+        }
+
+        #cDesc {
+            font-size: 20px;
+            color: #1c1818;
+            margin-top: 10px;
+            line-height: 1.5;
+        }
+
+        .lessonContentDiv {
+            background: #fffaf9;
+            border-left: 5px solid #007BFF;
+            padding: 15px;
+            margin-top: 20px;
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .frameVideo {
+            /* width: 100%; */
+            max-width: 900px;
+            height: 500px;
+            /* border-radius: 10px; */
+            align-items: center;
+            border: none;
+            display: block;
+  margin-left: auto;
+  margin-right: auto;
+
+            margin: auto;
+  width: 60%;
+  border: 3px solid #03178a;
+  padding: 10px;
+        }
+
+        .doneBtn {
+            display: block;
+            width: 200px;
+            height: 50px;
+            background: #0077b6;
+            margin-left: auto;
+            margin-right: auto;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 20px;
+        }
+
+
+        .doneBtn.clicked {
+  background: #2a4554;
+}
+
+    </style>
+</head>
+<body>
+
+    <div id="contentPageDiv">
+
+        <!--background image-->
+        <div id="imgContainer">
+            <img alt="bg image" id="bgImg">
+        </div>
+
+        <div id="cInfo">
+            <!--foreground image-->
+            <img alt="fg image" id="fgImg">
+            
+            <div id="cInfoTxt">
+                <!--title-->
+                <h1 id="cTitle"></h1>
+                <article id="cDesc"></article>
+                <h3 id="progress"></h3>
+            </div>
+
+        </div>
+
+
+        
+
+    </div>
+    <!--
+    <script src="https://www.gstatic.com/firebasejs/11.2.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.2.0/firebase-auth-compat.js"></script>
+    -->
+        <script type="module" src="contentPage.js"></script>
+
+</body>
+</html>
+
+
+

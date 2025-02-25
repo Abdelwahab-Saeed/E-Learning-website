@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard - Gamer Mood</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /* Reset and Base Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+    body {
+      /* A subtle white to very light pink gradient */
+      background: linear-gradient(145deg, #ffffff, #fff0f5);
+      min-height: 100vh;
+      color: #333;
+    }
+    /* Dashboard Layout */
+    .dashboard-container {
+      display: grid;
+      grid-template-columns: 260px auto;
+      width: 100%;
+      min-height: 100vh;
+    }
+    /* Sidebar Styles */
+    .sidebar {
+      background: #181d2a;
+      padding: 20px;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+
+    }
+    .sidebar .logo {
+      font-size: 26px;
+      font-weight: 600;
+      color: #fff;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .sidebar .user-info {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .sidebar .user-info img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      margin-bottom: 10px;
+      border: 2px solid #fff;
+    }
+    .sidebar .user-info h2 {
+      font-size: 18px;
+      margin-bottom: 5px;
+      color: #fff;
+    }
+    .sidebar nav ul {
+      list-style: none;
+      width: 100%;
+    }
+    .sidebar nav ul li {
+      margin-bottom: 20px;
+    }
+    .sidebar nav ul li a {
+      display: block;
+      text-decoration: none;
+      font-size: 16px;
+      color: #fff;
+      padding: 10px 15px;
+      border-radius: 4px;
+      transition: background 0.3s ease;
+    }
+    .sidebar nav ul li a:hover,
+    .sidebar nav ul li a.active {
+      background: #ff85a1; /* A slightly lighter pink on hover */
+      color: #fff;
+    }
+    /* Main Content Styles */
+    .main-content {
+      padding: 30px;
+      background: #fff;
+      min-height: 100vh;
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid #e50474;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #220212;
+    }
+    /* Activity Section */
+    .activity {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      border: 1px solid #ff69b4;
+      margin-bottom: 20px;
+    }
+    .activity h2 {
+      font-size: 20px;
+      color: #ff69b4;
+      margin-bottom: 10px;
+    }
+    .activity ul {
+      list-style: none;
+    }
+    .activity ul li {
+      padding: 10px;
+      border-bottom: 1px solid #ff69b4;
+      font-size: 16px;
+      color: #333;
+    }
+    .activity ul li:last-child {
+      border-bottom: none;
+    }
+    /* Page Container */
+    #container {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+    /* Form Styles */
+    #container form {
+      padding: 20px;
+      width: 500px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(255, 105, 180, 0.3);
+    }
+    #container form label {
+      margin-bottom: 5px;
+      display: block;
+      font-weight: 500;
+      color: #000000;
+    }
+    #container form input,
+    #container form textarea,
+    #container form select {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 15px;
+      border-radius: 10px;
+      border: 1px solid #141112;
+      background: #fff;
+      color: #333;
+    }
+    #container form textarea {
+      resize: vertical;
+      height: 100px;
+    }
+    /* Content Container within Form */
+    #ContentContainer {
+      margin-top: 20px;
+    }
+    #ContentContainer .lessonForm {
+      background: #fff;
+      border: 1px solid #ff69b4;
+      border-radius: 8px;
+      padding: 10px;
+      margin-bottom: 15px;
+    }
+    #ContentContainer .lessonForm label {
+      font-size: 14px;
+      color: #10060b;
+    }
+    /* Buttons */
+    #mainBtn,
+    #addCourse,
+    #addLessonBtn,
+    #updateBtn {
+      cursor: pointer;
+      border: none;
+      border-radius: 10px;
+      transition: background 0.3s ease;
+    }
+    #mainBtn {
+      background-color: #fab7d8;
+      color: #fff;
+      font-size: 18px;
+      height: 40px;
+      width: 100%;
+      margin-top: 10px;
+    }
+    #mainBtn:hover {
+      background-color: #ff85a1;
+    }
+    #addCourse {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 90%;
+      height: 100px;
+      font-size: x-large;
+      margin-top: 10px;
+      background-color: #ffa8d2;
+      color: #221818;
+      border-radius: 10px;
+    }
+    #addCourse:hover {
+      background-color: #ff85a1;
+    }
+    #addCourse:active {
+      background-color: #fff;
+      color: #ff69b4;
+      transform: scale(0.95);
+    }
+    /* Courses Container */
+    #coursesContainer {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 500px;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(255, 105, 180, 0.3);
+    }
+    #allCourses {
+      width: 100%;
+      background-color: #fff;
+      padding: 10px;
+      border-radius: 10px;
+      margin-top: 15px;
+    }
+    /* Delete and Update Buttons */
+    #delBtn {
+      width: 50px;
+      background-color: #ff69b4;
+      border: none;
+      border-radius: 10px;
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    #delBtn:hover {
+      background-color: #ff85a1;
+    }
+    #updateBtn {
+      display: none;
+      justify-content: center;
+      align-items: center;
+      background-color: #ff69b4;
+      color: #fff;
+      font-size: x-large;
+      height: 40px;
+      width: 100%;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+    /* Course Card */
+    .course-card {
+      border-radius: 10px;
+      background-color: #fff;
+      padding: 10px;
+      margin: 10px 0;
+      display: flex;
+      gap: 10px;
+      border: 1px solid #ff69b4;
+    }
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 10px;
+      background: #fab7d8;
+      color: #fff;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="dashboard-container">
+    <aside class="sidebar">
+      <div class="logo">Admin Panel</div>
+      <nav>
+        <ul>
+          <li><a href="admin_dashboard.html" class="active">Dashboard</a></li>
+          <li><a href="course.html">Manage Courses</a></li>
+          <li><a href="category.html">Manage Categories</a></li>
+          <li><a href="adminpanel.html">Registeration</a></li>
+          <li><a href="progressPage.html">Student progress</a></li>
+        </ul>
+      </nav>
+    </aside>
+    <main class="main-content">
+      <div class="header">
+        <h1>Course CRUD</h1>
+      </div>
+      <div id="container">
+
+        <form id="courseForm">
+
+            <h1 id="operation">ADD Course</h1>
+            
+            <label for="courseTitle">Title:</label>
+            <input type="text" id="courseTitle" name="courseTitle"  ><br><br>
+            
+            <!--maintainance-->
+            <label for="image">Foreground Image Link:</label>
+            <input type="text" id="image" name="image" ><br><br>
+
+            <!--maintainance-->
+            <label for="bgImage">Background Image Link:</label>
+            <input type="text" id="bgImage" name="bgImage" ><br><br>
+            
+            <label for="category">Category:</label>
+            <select name="category" id="category" ><option value="">Select a category</option>
+            </select><br><br>
+            
+            <label for="instructor">Instructor Name:</label>
+            <input type="text" id="instructor" name="instructor" ><br><br>
+            
+            <label for="description">Description:</label><br>
+            <textarea id="description" name="description" rows="4" cols="50" ></textarea><br><br>
+            
+            <label for="accessType">Category:</label>
+            <select name="accessType" id="accessType">
+                <option value="free">Free</option>
+                <option value="paid">Paid</option>
+            </select><br><br>
+
+            <label for="price">Price: </label>
+            <input type="number" id="price" name="price" disabled style="background-color: rgb(204, 204, 204);;"><br><br>
+            
+            <label for="duration">Duration:</label>
+            <input type="number" id="duration" name="duration"><br><br>
+
+
+            <!--Content Div-->
+            <div id="ContentContainer">
+
+                <div style="display: flex;
+                            justify-content: space-between;
+                            margin-bottom: 10px;">
+                    <h2>Content</h2>
+                    <button id="addLessonBtn" type="button">Add Lesson</button>
+                </div>
+
+
+                <fieldset class="lessonForm">
+
+                    <!--title-->
+                    <label for="lessonTitle">Title: </label>
+                    <input type="text" class="mandatory lessonTitle">
+
+                    <!--video url-->
+                    <label for="videoURL">Video URL: </label>
+                    <input type="text" class="mandatory videoURL">
+
+                    <!--asset-->
+                    <label for="asset">Asset: </label>
+                    <input type="file" class="asset">
+
+                    <!--rmBtn-->
+                    <button onclick="remove(event)" type="button">X</button>
+
+                </fieldset>
+
+            </div>
+
+            
+            <input type="submit" value="Submit" id="mainBtn">
+            <button id="updateBtn" type="button">UPDATE</button>
+        </form>
+
+        <!--retrieve the data here-->
+        <div id="coursesContainer">
+            <button id="addCourse" onclick="resetForm()">addCourse</button>
+            <h2 style='text-align: center; color: #eee; margin-top: 20px'>Stored Courses</h2>
+            <div id="allCourses"></div>
+        </div>
+
+    </div>
+
+
+    <div id="courseList"></div>
+    </main>
+  </div>
+  <footer>
+    <p>&copy; 2025 All rights reserved.</p>
+  </footer>
+  <script type="module" src="/JS/crudCourse.js"></script>
+  <script src="./JS/H_crudCourse/addContent.js"></script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Certificate of Completion</title>
+  <link  href="certificate.css"  rel="stylesheet">
+</head>
+<body>
+  <div class="certificate-container">
+    <h1>Certificate of Completion</h1>
+    <p>This certifies that</p>
+    <h2 id="userName">[User Name]</h2>
+    <p>has successfully passed the quiz with a score of <span id="score">0</span>/4.</p>
+    <p>Congratulations!</p>
+    <button onclick="window.print()">Print Certificate</button>
+  </div>
+
+  <script>
+    document.getElementById('userName').innerText = localStorage.getItem("userName") || "Student";
+    document.getElementById('score').innerText = localStorage.getItem("userScore") || "0";
+  </script>
+</body>
+</html>

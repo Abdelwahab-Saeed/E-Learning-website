@@ -1,0 +1,227 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #0a0f29;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: #fff;
+}
+
+.container {
+    display: flex;
+    background: #131b3a;
+    width: 100%;
+    max-width: auto;
+    border-radius: 10px;
+     box-shadow: -10px 0 15px rgba(0, 153, 255, 0.7), 
+                10px 0 15px rgba(0, 153, 255, 0.7); 
+overflow: hidden;
+    border: 2px solid #0099ff;
+}
+
+
+.left {
+    flex: 1;
+    display: flex;
+     justify-content: center;
+    align-items: center;
+    background: linear-gradient(145deg, #0e162e, #0e162e);
+      padding: 40px;
+}
+
+.character {
+    width: 100%;
+    max-width: 300px;
+}
+
+.right {
+    flex: 2;
+      padding: 40px;
+    background: #131b3a;
+}
+
+
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    width: 100%;
+    font-size: 14px;
+    color: #00c3ff;
+    text-shadow: 0 0 5px #0099ff;
+    margin-bottom: 5px;
+}
+
+.input-group input,
+.input-group select {
+    width: 100%;
+    padding: 14px;
+    border: 2px solid #0099ff;
+      background: #0a0f29;
+    color: #fff;
+    border-radius: 5px;
+    font-size: 16px;
+    box-shadow: 0 0 10px rgba(0, 153, 255, 0.5);
+    outline: none;
+}
+
+.input-group input:focus,
+.input-group select:focus {
+    border-color: #00c3ff;
+    box-shadow: 0 0 15px rgba(0, 195, 255, 0.7);
+}
+
+.input-group input[type="file"] {
+    padding: 5px;
+}
+
+.register-btn {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(to right, #0099ff, #0066cc);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    contain: content;
+
+    margin-top: 10px;
+    text-transform: uppercase;
+    box-shadow: 0 0 15px rgba(0, 153, 255, 0.8);
+    transition: all 0.3s ease-in-out;
+}
+
+
+.register-container {
+    text-align: center; 
+}
+
+
+.register-btn:hover {
+    background: linear-gradient(to right, #00c3ff, #0099ff);
+    box-shadow: 0 0 20px rgba(0, 195, 255, 1);
+    transform: scale(1.05);
+}
+
+.login-text {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+
+.login-text a {
+    color: #00c3ff;
+    text-decoration: none;
+    text-shadow: 0 0 5px #00c3ff;
+}
+
+.login-text a:hover {
+    text-decoration: underline;
+    color: #0099ff;
+}
+
+/*welcome page sttttyllle*/
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #0a0a23;
+            color: white;
+            text-shadow: 0px 0px 10px #023c3f;
+        }
+
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 120px;
+            background: linear-gradient(to right, #020236, #06061d);
+            box-shadow: 0px 4px 20px rgba(17, 212, 212, 0.3);
+            position: relative;
+            border-radius: 0px;
+        }
+
+        .hero .logo {
+            position: absolute;
+            top: 30px;
+            left: 40px;
+            width: 100px;
+            filter: drop-shadow(0px 0px 10px #034f55);
+        }
+
+        .content {
+            max-width: 50%;
+        }
+
+        h1 {
+            font-size: 34px;
+            color: #fff;
+        }
+
+        h1 span {
+            color: #8882f8;
+            font-size: 32px;
+        }
+
+        p {
+            font-size: 18px;
+            color: #ddd;
+            margin: 20px 0;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-right: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0px 0px 15px rgba(2, 201, 201, 0.5);
+        }
+
+        .read-more {
+            background-color: #6c63ff;
+            color: white;
+        }
+
+        .read-more:hover {
+            background-color: #5548c8;
+            box-shadow: 0px 0px 20px rgba(3, 36, 36, 0.7);
+        }
+
+        .view {
+            background-color: #111;
+            border: 2px solid #6c63ff;
+            color: #6c63ff;
+        }
+
+        .view:hover {
+            background-color: #6c63ff;
+            color: white;
+            box-shadow: 0px 0px 20px rgba(255, 0, 255, 0.7);
+        }
+
+        .image {
+            max-width: 100%;
+            width: 450px;
+        }
+
+        .animated-image {
+            width: 100%;
+            transition: transform 0.5s ease-in-out;
+            filter: drop-shadow(0px 0px 15px #003a3d);
+        }
+
+        .animated-image:hover {
+            transform: scale(1.1);
+        }

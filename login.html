@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDzkfiCihtsJ5ip08cx0QySH7UIpdVEKhM",
+            authDomain: "e-laerning-1dcc6.firebaseapp.com",
+            projectId: "e-laerning-1dcc6",
+            storageBucket: "e-laerning-1dcc6.appspot.com",
+            messagingSenderId: "1006424759938",
+            appId: "1:1006424759938:web:cee85ec89369a138b25e9b"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+
+const urlParams = new URLSearchParams(window.location.search);
+const redirect = urlParams.get('redirect');
+if (redirect) {
+    window.location.href = redirect;
+}
+
+
+            function saveUserData(userEmail) {
+                let userData = JSON.parse(localStorage.getItem(userEmail));
+
+                if (!userData) {
+                    userData = { userEmail, wishlist: [], enrolledCourses: [] };
+                }
+
+                localStorage.setItem("loggedInUser", JSON.stringify(userData));
+                localStorage.setItem(userEmail, JSON.stringify(userData));
+            }
+          
+
+
+
+
+
+
+
+        document.getElementById("loginForm").addEventListener("submit", async function (event) {
+            event.preventDefault();
+
+            let email = document.getElementById("email").value;
+            let password = document.getElementById("password").value;
+
+            const adminEmail = "mrihan@iti.gov.eg";
+            const adminPassword = "1234567";
+
+
+
+
+            document.getElementById("emailError").textContent = "";
+            document.getElementById("passwordError").textContent = "";
+
+            if (!email) {
+                document.getElementById("emailError").textContent = "Email is required";
+                return;
+            }
+
+            if (!password) {
+                document.getElementById("passwordError").textContent = "Password is required";
+                return;
+            }
+
+            let emailPattern = /^[a-zA-Z0-9._%+-]+@iti\.gov\.eg$/;
+
+            try {
+
+                if (email === adminEmail && password === adminPassword) {
+                    alert("Admin login successful");
+                    window.location.href = "admin_dashboard.html";
+                    return;
+                }
+
+
+                else {
+
+
+
+                    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+                    const user = userCredential.user;
+                    
+                    alert("Student login successful! Welcome to Learn World   "+user.email);
+                    
+                    saveUserData(email);
+                   window.location.href = "userinterface.html";
+
+                    // alert("Incorrect admin credentials.");
+                    return;
+                }
+
+
+            } catch (error) {
+                document.getElementById("passwordError").textContent = "Incorrect email or password";
+            }
+        });
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+
+        html,
+        body {
+            height: 100%;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #0a0f29;
+        }
+
+        .loginBox {
+            background-color: #131b3a;
+            border: 2px solid #00c3ff;
+            border-radius: 15px;
+            width: 600px;
+            height: 600px;
+            padding-top: 80px;
+            background: linear-gradient(145deg, #0e162e, #0e162e);
+            padding: 40px;
+            text-shadow: 0 0 5px #0099ff;
+            box-shadow: 0 0 15px rgba(0, 153, 255, 0.5);
+        }
+
+        .loginBox h1 {
+            text-align: center;
+            color: #00c3ff;
+            text-shadow: 0 0 5px #00c3ff;
+        }
+
+        .loginBox form {
+            margin: 20px;
+            padding: 10px;
+        }
+
+        .userBox {
+            margin: 10px;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .userBox input {
+            width: 100%;
+            padding: 14px;
+            margin: 3px;
+            border: 2px solid #0099ff;
+            background: #0a0f29;
+            color: #fff;
+            border-radius: 5px;
+            font-size: 16px;
+            box-shadow: 0 0 10px rgba(0, 153, 255, 0.5);
+            outline: none;
+            padding-left: 40px;
+        }
+
+        .userBox input:focus {
+            border-color: #00c3ff;
+            box-shadow: 0 0 15px rgba(0, 195, 255, 0.7);
+        }
+
+        .userBox i {
+            font-size: 20px;
+            color: #00c3ff;
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .loginBox label {
+            font-size: 20px;
+            color: #00c3ff;
+            margin-bottom: 5px;
+            padding-left: 14px;
+        }
+
+        .remember {
+            margin-left: 15px;
+            margin-top: 15px;
+            font-size: 20px;
+            color: #00c3ff;
+        }
+
+        .login-btn-container {
+            text-align: center;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(to right, #0099ff, #0066cc);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+            text-transform: uppercase;
+            box-shadow: 0 0 15px rgba(0, 153, 255, 0.8);
+            transition: all 0.3s ease-in-out;
+        }
+
+        .login-btn:hover {
+            background: linear-gradient(to right, #00c3ff, #0099ff);
+            box-shadow: 0 0 20px rgba(0, 195, 255, 1);
+            transform: scale(1.05);
+        }
+
+        .register-text {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 20px;
+            color: #00c3ff;
+        }
+
+        .register-text a {
+            color: #00c3ff;
+            text-decoration: none;
+        }
+
+        .register-text a:hover {
+            text-decoration: underline;
+            color: #0099ff;
+        }
+
+        .error {
+            color: red;
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="loginBox">
+        <h1>Login</h1>
+        <form id="loginForm">
+            <label for="email">Email *</label>
+            <div class="userBox">
+                <input type="email" id="email" required placeholder="Enter your email">
+                <i class='bx bxs-user'></i>
+            </div>
+            <div id="emailError" class="error"></div>
+
+            <label for="password">Password *</label>
+            <div class="userBox">
+                <input type="password" id="password" required placeholder="Enter your password">
+                <i class='bx bxs-lock-alt'></i>
+            </div>
+            <div id="passwordError" class="error"></div>
+
+            <div class="remember">
+                <input type="checkbox"> Remember Me
+            </div>
+
+            <div class="login-btn-container">
+                <button type="submit" class="login-btn">Login</button>
+            </div>
+
+            <div class="register-text">
+                <p>Don't have an account? <a href="Register.html">Register</a></p>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,460 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard UI - Gamer Mode</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+    import { getFirestore, collection, getDocs, addDoc } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+  
+    const firebaseConfig = {
+      apiKey: "AIzaSyDzkfiCihtsJ5ip08cx0QySH7UIpdVEKhM",
+      authDomain: "e-laerning-1dcc6.firebaseapp.com",
+      projectId: "e-laerning-1dcc6",
+      storageBucket: "e-laerning-1dcc6.appspot.com",
+      messagingSenderId: "1006424759938",
+      appId: "1:1006424759938:web:cee85ec89369a138b25e9b"
+    };
+  
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    async function fetchCategories() {
+      const categoriesContainer = document.querySelector('.course-categories');
+      categoriesContainer.innerHTML = '';
+  
+      try {
+        const allCoursesBtn = document.createElement('button');
+        allCoursesBtn.classList.add('category-btn');
+        allCoursesBtn.textContent = 'All Courses';
+        allCoursesBtn.addEventListener('click', fetchCourses);
+        categoriesContainer.appendChild(allCoursesBtn);
+  
+        const querySnapshot = await getDocs(collection(db, "categories"));
+  
+        querySnapshot.forEach((doc) => {
+          const category = doc.data();
+  
+          const categoryBtn = document.createElement('button');
+          categoryBtn.classList.add('category-btn');
+          categoryBtn.textContent = category.name;
+  
+          categoryBtn.addEventListener('click', () => fetchCoursesByCategory(category.name));
+  
+          categoriesContainer.appendChild(categoryBtn);
+        });
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      }
+    }
+
+    async function fetchCourses() {
+      const coursesContainer = document.querySelector('.courses');
+      coursesContainer.innerHTML = '';
+  
+      try {
+        const querySnapshot = await getDocs(collection(db, "courses"));
+        const user = await getCurrentUser();
+    
+        if (!user) return; 
+    
+        const enrollmentsSnapshot = await getDocs(collection(db, "enrollments"));
+        const approvedCourses = enrollmentsSnapshot.docs.filter(doc => {
+          const enrollmentData = doc.data();
+          return enrollmentData.userId === user.email && enrollmentData.status === 'approved';
+        }).map(doc => doc.data().courseTitle);
+    
+        querySnapshot.forEach((doc) => {
+          const course = doc.data();
+          if (approvedCourses.includes(course.title)) {
+            const courseCard = document.createElement('div');
+            courseCard.classList.add('course-card');
+    
+            courseCard.innerHTML = `
+              <img src="${course.image || '/default-image.jpg'}" alt="${course.title}">
+              <h3>${course.title}</h3>
+              <p>${course.description}</p>
+              <div class="course-actions">
+                <button class="fav-btn">❤️</button>
+                <button class="enroll-btn" data-course-title="${course.title}">Access Content</button>
+              </div>
+            `;
+    
+            const enrollButton = courseCard.querySelector('.enroll-btn');
+            enrollButton.addEventListener('click', () => window.location.href = `/contentPage.html?courseTitle=${course.title}&userEmail=${user.email}`);
+    
+            coursesContainer.appendChild(courseCard);
+            const favButton = courseCard.querySelector('.fav-btn');
+            favButton.addEventListener('click', () => handleFavButtonClick(favButton, course));
+          }
+        });
+      } catch (error) {
+        console.error("Error fetching courses:", error);
+      }
+    }
+
+    async function fetchCoursesByCategory(categoryName) {
+      const coursesContainer = document.querySelector('.courses');
+      coursesContainer.innerHTML = '';
+  
+      try {
+        const querySnapshot = await getDocs(collection(db, "courses"));
+        const user = await getCurrentUser();
+    
+        if (!user) return; // If no user is logged in, skip loading courses
+    
+        // Fetch the user's approved enrollments
+        const enrollmentsSnapshot = await getDocs(collection(db, "enrollments"));
+        const approvedCourses = enrollmentsSnapshot.docs.filter(doc => {
+          const enrollmentData = doc.data();
+          return enrollmentData.userId === user.email && enrollmentData.status === 'approved';
+        }).map(doc => doc.data().courseTitle);
+    
+        querySnapshot.forEach((doc) => {
+          const course = doc.data();
+          if (course.category === categoryName && approvedCourses.includes(course.title)) {
+            const courseCard = document.createElement('div');
+            courseCard.classList.add('course-card');
+    
+            courseCard.innerHTML = `
+              <img src="${course.image || '/default-image.jpg'}" alt="${course.title}">
+              <h3>${course.title}</h3>
+              <p>${course.description}</p>
+              <div class="course-actions">
+                <button class="fav-btn">❤️</button>
+                <button class="enroll-btn" data-course-title="${course.title}">Access Content</button>
+              </div>
+            `;
+    
+            const enrollButton = courseCard.querySelector('.enroll-btn');
+            enrollButton.addEventListener('click', () => window.location.href = `/course-content.html?title=${course.title}`);
+    
+            coursesContainer.appendChild(courseCard);
+            const favButton = courseCard.querySelector('.fav-btn');
+            favButton.addEventListener('click', () => handleFavButtonClick(favButton, course));
+          }
+        });
+      } catch (error) {
+        console.error("Error fetching courses by category:", error);
+      }
+    }
+
+    async function enrollInCourse(courseTitle) {
+      try {
+        const user = await getCurrentUser();
+    
+        if (!user) {
+          alert("Please log in first.");
+          return;
+        }
+    
+        const userEmail = user.email;
+        const userName = user.displayName || "Anonymous User";
+    
+        const enrollmentData = {
+          userId: userEmail,
+          userName: userName,
+          courseTitle: courseTitle,
+          status: "pending",  
+          timestamp: new Date(),
+        };
+    
+        const enrollmentRef = await addDoc(collection(db, "enrollments"), enrollmentData);
+    
+        const enrollButton = document.querySelector(`[data-course-title="${courseTitle}"]`);
+        enrollButton.textContent = "Pending";
+        enrollButton.disabled = true;  
+    
+        alert("Enrollment request sent to admin!");
+    
+      } catch (error) {
+        console.error("Error enrolling in course:", error);
+        alert("There was an error processing your enrollment request.");
+      }
+    }
+
+    function getCurrentUser() {
+      return new Promise((resolve, reject) => {
+        onAuthStateChanged(auth, (user) => {
+          if (user) {
+            resolve(user);
+          } else {
+            reject("No user is logged in");
+          }
+        });
+      });
+    }
+
+    const WISHLIST_KEY = "userWishlist";
+    
+    function addToWishlist(course) {
+      let wishlist = JSON.parse(localStorage.getItem(WISHLIST_KEY)) || [];
+      const isInWishlist = wishlist.find((item) => item.title === course.title);
+
+      if (isInWishlist) {
+        wishlist = wishlist.filter((item) => item.title !== course.title);
+        alert(`${course.title} removed from your wishlist.`);
+      } else {
+        wishlist.push(course);
+        alert(`${course.title} added to your wishlist.`);
+      }
+
+      localStorage.setItem(WISHLIST_KEY, JSON.stringify(wishlist));
+    }
+
+    function loadWishlist() {
+      const wishlist = JSON.parse(localStorage.getItem(WISHLIST_KEY)) || [];
+      wishlist.forEach((course) => {
+        const favButton = document.querySelector(`[data-course-title="${course.title}"]`)?.closest('.course-card')?.querySelector('.fav-btn');
+        if (favButton) {
+          favButton.classList.add('liked');
+        }
+      });
+    }
+
+    function handleFavButtonClick(favButton, course) {
+      favButton.classList.toggle("liked");
+      addToWishlist(course);
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      fetchCategories();
+      fetchCourses();
+      loadWishlist();
+    });
+  </script>
+  <style>
+
+
+
+
+
+
+
+
+
+
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+  
+    body {
+      display: flex;
+      min-height: 100vh;
+      background: linear-gradient(145deg, #1a1c2e, #101221);
+      color: #fdbfe6;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+  
+    .container {
+  display: grid;
+  grid-template-columns: 250px 1fr 250px;
+  width: 100%;
+  height: 100vh;
+  gap: 30px;
+  padding: 20px;
+}
+
+.sidebar {
+  background: linear-gradient(145deg, #16192d, #121423);
+  padding: 20px;
+  display: flex;
+  width: 100%; /* تمديد الحاوية */
+  flex-direction: column;
+  justify-content: flex-start;
+  box-shadow: 8px 0 25px rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+}
+
+    .sidebar .user-info {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+  
+    .user-info img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      margin-bottom: 10px;
+    }
+  
+    .user-info h4 {
+      font-size: 18px;
+      font-weight: 500;
+      color: #fff;
+    }
+  
+    .category-btn {
+      background: transparent;
+      color: #fff;
+      border: none;
+      margin: 8px 0;
+      font-size: 16px;
+      padding: 12px;
+      text-align: left;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: 0.3s ease;
+    }
+  
+    .category-btn:hover {
+      background: #ff6b81;
+      color: #3b3f56;
+    }
+  
+    .courses {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+      gap: 20px;
+      padding: 20px;
+      overflow-y: auto;
+      width: 100%;
+    }
+  
+    .course-card {
+      background-color: #2f3443;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+  
+    .course-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+    }
+  
+    .course-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+  
+    .course-card h3 {
+      color: #fff;
+      font-size: 18px;
+      margin: 15px 0;
+    }
+  
+    .course-card p {
+      color: #b6b9c1;
+      font-size: 14px;
+      margin-bottom: 25px;
+    }
+  
+    .course-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  
+    .fav-btn,
+    .enroll-btn {
+      background-color: #ff6b81;
+      border: none;
+      padding: 10px 15px;
+      font-size: 14px;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+  
+    .fav-btn.liked {
+      background-color: #ffd6e1;
+      color: #f54263;
+    }
+  
+    .fav-btn:hover,
+    .enroll-btn:hover {
+      background-color: #ff3c5f;
+    }
+  
+    .fav-btn:focus,
+    .enroll-btn:focus {
+      outline: none;
+    }
+
+    nav ul {
+      list-style: none;
+      margin-top: 20px;
+    }
+  
+    nav ul li {
+      margin-bottom: 20px;
+    }
+  
+    nav ul li a {
+      text-decoration: none;
+      font-size: 16px;
+      color: #ffffff;
+      padding: 12px 10px;
+      display: block;
+      border-radius: 10px;
+      transition: background 0.4s, box-shadow 0.3s;
+    }
+  
+    nav ul li a:hover {
+      background-color: #ff007a;
+      box-shadow: 0px 5px 15px rgba(255, 0, 122, 0.5);
+      color: #ffffff;
+    }
+  
+
+
+
+    /* For smooth scrolling and better spacing */
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="sidebar">
+        <nav>
+            <ul>
+              <li><a href="userinterface.html">Home</a></li>
+              <li><a href="WishList.html">My Wishlist</a></li>
+              <li><a href="enrolledcourses.html">EnrolledCourses</a></li>
+    
+              <li><a href="#">Settings</a></li>
+            </ul>
+          </nav>
+    </div>
+    <div class="courses"></div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MCQ Quiz</title>
+  <link  href="style.css" rel="stylesheet">
+</head>
+<body>
+  <div class="quiz-container">
+    <h1>MCQ Quiz</h1>
+    <form id="quizForm">
+      <div class="question">
+        <p>Question 1: Which attribute is used to provide an alternative text for an image, if the image cannot be displayed?</p>
+        <input type="radio" name="q1" value="title"> A) title<br>
+        <input type="radio" name="q1" value="alt"> B) alt<br>
+        <input type="radio" name="q1" value="src"> C) src<br>
+        <input type="radio" name="q1" value="href"> D) href<br>
+      </div>
+
+      <div class="question">
+        <p>Question 2: Who is the father of HTML?</p>
+        <input type="radio" name="q2" value="Rasmus Lerdorf"> A) Rasmus Lerdorf<br>
+        <input type="radio" name="q2" value="Tim Berners-Lee"> B) Tim Berners-Lee<br>
+        <input type="radio" name="q2" value="Brendan Eich"> C) Brendan Eich<br>
+        <input type="radio" name="q2" value="Sergey Brin"> D) Sergey Brin<br>
+      </div>
+
+      <div class="question">
+        <p>Question 3: HTML stands for __________</p>
+        <input type="radio" name="q3" value="HyperText Markup Language"> A) HyperText Markup Language<br>
+        <input type="radio" name="q3" value="HyperText Machine Language"> B) HyperText Machine Language<br>
+        <input type="radio" name="q3" value="HyperText Marking Language"> C) HyperText Marking Language<br>
+        <input type="radio" name="q3" value="HighText Marking Language"> D) HighText Marking Language<br>
+      </div>
+
+      <div class="question">
+        <p>Question 4: What is the correct syntax of doctype in HTML5?</p>
+        <input type="radio" name="q4" value="</doctype html>"> A) &lt;/doctype html&gt;<br>
+        <input type="radio" name="q4" value="<doctype html>"> B) &lt;doctype html&gt;<br>
+        <input type="radio" name="q4" value="<doctype html!>"> C) &lt;doctype html!&gt;<br>
+        <input type="radio" name="q4" value="<!doctype html>"> D) &lt;!doctype html&gt;<br>
+    </div>
+    
+
+      <button type="submit">Submit</button>
+    </form>
+    <div id="result"></div>
+  </div>
+
+  <script src="quiz.js"></script>
+</body>
+</html>

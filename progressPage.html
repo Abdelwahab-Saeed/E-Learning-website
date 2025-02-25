@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expandable Div</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(145deg, #090b0f, #181d2a);
+            color: #fdbfe6;
+            min-height: 100vh;
+        }
+
+        .dashboard-container {
+            display: grid;
+            grid-template-columns: 250px auto;
+            width: 100%;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            background: #181d2a;
+            padding: 20px;
+            color: #ffffff;
+        }
+
+        .sidebar .logo {
+            font-size: 24px;
+            font-weight: 600;
+            color: #f3e7ed;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .sidebar .user-info {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .sidebar .user-info img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+            border: 2px solid #ff007a;
+        }
+
+        .sidebar .user-info h2 {
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .sidebar nav ul {
+            list-style: none;
+        }
+
+        .sidebar nav ul li {
+            margin-bottom: 20px;
+        }
+
+        .sidebar nav ul li a {
+            text-decoration: none;
+            font-size: 16px;
+            color: #ffffff;
+            padding: 10px 15px;
+            display: block;
+            border-radius: 4px;
+            transition: background 0.3s ease;
+        }
+
+        .sidebar nav ul li a:hover {
+            background: #e70171;
+            color: #0f0f0f;
+            box-shadow: 0px 5px 15px rgba(255, 0, 122, 0.5);
+        }
+
+        .main-content {
+            padding: 30px;
+            background: #22263a;
+            color: #ffffff;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #e70171;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            color: #f8edf2;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .card {
+            background: #181d2a;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(255, 0, 122, 0.3);
+            transition: transform 0.3s ease;
+            color: #ffffff;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            background: #a80252;
+            color: #0f0f0f;
+        }
+
+        .card h2 {
+            font-size: 22px;
+            color: #ffffff;
+        }
+
+        .card p {
+            font-size: 18px;
+            font-weight: 500;
+            color: #e70171;
+        }
+
+        .activity {
+            background: #181d2a;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(255, 0, 122, 0.3);
+        }
+
+        .activity h2 {
+            font-size: 20px;
+            color: #e70171;
+            margin-bottom: 10px;
+        }
+
+        .activity ul {
+            list-style: none;
+        }
+
+        .activity ul li {
+            padding: 10px;
+            border-bottom: 1px solid #e70171;
+            font-size: 16px;
+            color: #d6d6d6;
+        }
+
+        .box {
+            width: 600px;
+            height: 35px;
+            /*collapsed*/
+            border: 2px solid #333;
+            border-radius: 5px;
+            padding: 10px;
+            background-color: #ddd;
+            overflow: hidden;
+            transition: height 0.2s;
+            cursor: pointer;
+            color:#0f0f0f;
+        }
+
+        .expanded {
+            height: 200px;
+            /* Expanded height */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="logo">Admin Panel</div>
+
+            <nav>
+                <ul>
+                    <li><a href="admin_dashboard.html" class="active">Dashboard</a></li>
+                    <li><a href="course.html">Manage Courses</a></li>
+                    <li><a href="category.html">Manage Categories</a></li>
+                    <li><a href="adminpanel.html">Registeration</a></li>
+                    <li><a href="progressPage.html">Student progress</a></li>
+                  </ul>
+            </nav>
+        </aside>
+        <main class="main-content">
+            <div class="header">
+                <h1>Category CRUD</h1>
+
+            </div>
+            <div id="container"></div>
+
+            <script type="module" src="progressPage.js"></script>
+
+</body>
+
+</html>
