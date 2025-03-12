@@ -6,6 +6,328 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard UI Clone - Gamer Mode</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(145deg, #021233, #00113a);
+      color: #fdbfe6;
+      height: 10px;
+      min-height: 10vh;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: 250px auto;
+      width: 100%;
+      height: 90vh;
+      border-radius: 15px;
+      overflow: hidden;
+      background: #22263a;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      transition: all 0.3s ease-in-out;
+    }
+
+    .container:hover {
+      transform: scale(1.02);
+    }
+
+    .sidebar {
+      background: #181d2a;
+      padding: 30px 20px;
+      color: #fff;
+      box-shadow: 5px 0 15px rgba(0, 0, 0, 0.5);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .sidebar .user-info {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+
+
+    .search-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 5px;
+      margin: 20px auto;
+      max-width: 900px;
+      background: #2b2f3d;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .search-input {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      border-radius: 20px;
+      outline: none;
+      font-size: 16px;
+      background: #181d2a;
+      color: #fdbfe6;
+    }
+
+    .search-btn {
+      background: #096ae9;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      padding: 8px 12px;
+      cursor: pointer;
+      margin-left: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .search-btn:hover {
+      background: #418ce2;
+    }
+
+
+    .sidebar .user-info img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      margin-bottom: 10px;
+      border: 2px solid #ecf0f1;
+    }
+
+    .sidebar .user-info h2 {
+      font-size: 16px;
+      margin-bottom: 5px;
+    }
+
+    .sidebar .user-info p {
+      font-size: 14px;
+      color: #ffffff;
+    }
+
+    .sidebar nav ul {
+      list-style: none;
+      padding: 0;
+      width: 100%;
+    }
+
+    .sidebar nav ul li {
+      margin-bottom: 20px;
+    }
+
+    .sidebar nav ul li a {
+      text-decoration: none;
+      font-size: 16px;
+      color: #fff;
+      padding: 12px 20px;
+      display: block;
+      border-radius: 10px;
+      transition: background 0.3s ease;
+    }
+
+    .sidebar nav ul li a:hover {
+      background-color: #ff007a;
+      box-shadow: 0px 5px 15px rgba(255, 0, 122, 0.5);
+      color: white;
+    }
+
+    .main-content {
+      padding: 40px;
+      overflow-y: auto;
+      background: #22263a;
+    }
+
+    .course-categories {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .category-btn {
+      background: #181d2a;
+      padding: 8px 20px;
+      border: none;
+      color: #fdbfe6;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .category-btn:hover {
+      background: linear-gradient(45deg, #ff007a, #ff3399);
+    }
+
+    .category-btn.active {
+      background: #ff007a;
+      color: #181d2a;
+    }
+
+    .courses {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      /* Fixed minimum size */
+      gap: 20px;
+    }
+
+    .course-card {
+      width: 300px;
+      background: #22263a;
+      padding: 20px;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+      transition: all 0.3s ease;
+    }
+
+    .course-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 20px rgba(255, 0, 122, 0.4);
+    }
+
+    .course-card img {
+      width: 100%;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+
+    .course-card h3 {
+      color: #ff007a;
+      font-size: 20px;
+      margin-bottom: 5px;
+    }
+
+    .course-card p {
+      color: #d6d6d6;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    .course-actions {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .course-actions button {
+      padding: 8px 12px;
+      border: none;
+      border-radius: 4px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .course-actions button.enroll-btn {
+      background: #0077b6;
+      color: #fbfcfe;
+    }
+
+    .course-actions button.enroll-btn.pending {
+      background: #f39c12;
+      color: #0d1117;
+      cursor: default;
+    }
+
+    .course-actions button.pay-btn {
+      background: #25b2ce;
+      color: #0d1117;
+    }
+
+    .course-actions button:hover {
+      opacity: 0.9;
+    }
+
+    .fav-btn {
+      background: none;
+      border: none;
+      font-size: 80px;
+      /* Increased from 64px to 80px */
+      cursor: pointer;
+      color: #d6d6d6;
+      transition: color 0.3s;
+    }
+
+    /* .fav-btn.liked {
+      font-size: 40px;
+
+      color: #ff007a;
+    } */
+
+    .fav-btn:hover {
+      color: #ff007a;
+    }
+
+    footer {
+      text-align: center;
+      padding: 10px;
+      background: #181d2a;
+      background: linear-gradient(145deg, #021233, #00113a);
+
+      color: #fdbfe6;
+      margin-top: 20px;
+    }
+
+    .logout-btn {
+      background: #f44336;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      cursor: pointer;
+      border-radius: 6px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+      margin-top: 10px;
+    }
+
+    .logout-btn:hover {
+      background: #d32f2f;
+    }
+  </style>
+
+
+</head>
+
+<body>
+
+  
+  <div class="container">
+    <aside class="sidebar">
+
+      <nav>
+        <ul>
+          <li><a href="login.html">Home</a></li>
+          <li><a href="WishList.html">My wishlist</a></li>
+          <li><a href="enrolledcourses.html">EnrolledCourses</a></li>
+          <li><a href="#"><button id="logout-btn" class="logout-btn">Logout</button></a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <div class="search-container">
+        <input type="text" id="search-bar" class="search-input" placeholder="Search for courses...">
+        <button id="search-btn" class="search-btn">🔍</button>
+      </div>
+      <div class="all-courses"></div>
+      <div class="course-categories"></div>
+      <div class="courses"></div>
+    </main>
+  </div>
+  <footer>
+    <p>ALL rights reserved</p>
+  </footer>
+
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
     import { getAuth, onAuthStateChanged,signOut } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
@@ -497,326 +819,7 @@
 
     document.getElementById('logout-btn').addEventListener('click', logout);
   </script>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
-    }
-
-    body {
-      background: linear-gradient(145deg, #021233, #00113a);
-      color: #fdbfe6;
-      height: 10px;
-      min-height: 10vh;
-    }
-
-    .container {
-      display: grid;
-      grid-template-columns: 250px auto;
-      width: 100%;
-      height: 90vh;
-      border-radius: 15px;
-      overflow: hidden;
-      background: #22263a;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-      transition: all 0.3s ease-in-out;
-    }
-
-    .container:hover {
-      transform: scale(1.02);
-    }
-
-    .sidebar {
-      background: #181d2a;
-      padding: 30px 20px;
-      color: #fff;
-      box-shadow: 5px 0 15px rgba(0, 0, 0, 0.5);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .sidebar .user-info {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-bottom: 40px;
-      text-align: center;
-    }
-
-
-    .search-container {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 5px;
-      margin: 20px auto;
-      max-width: 900px;
-      background: #2b2f3d;
-      border-radius: 15px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    }
-
-    .search-input {
-      flex: 1;
-      padding: 10px;
-      border: none;
-      border-radius: 20px;
-      outline: none;
-      font-size: 16px;
-      background: #181d2a;
-      color: #fdbfe6;
-    }
-
-    .search-btn {
-      background: #096ae9;
-      color: white;
-      border: none;
-      border-radius: 50%;
-      padding: 8px 12px;
-      cursor: pointer;
-      margin-left: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    }
-
-    .search-btn:hover {
-      background: #418ce2;
-    }
-
-
-    .sidebar .user-info img {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      margin-bottom: 10px;
-      border: 2px solid #ecf0f1;
-    }
-
-    .sidebar .user-info h2 {
-      font-size: 16px;
-      margin-bottom: 5px;
-    }
-
-    .sidebar .user-info p {
-      font-size: 14px;
-      color: #ffffff;
-    }
-
-    .sidebar nav ul {
-      list-style: none;
-      padding: 0;
-      width: 100%;
-    }
-
-    .sidebar nav ul li {
-      margin-bottom: 20px;
-    }
-
-    .sidebar nav ul li a {
-      text-decoration: none;
-      font-size: 16px;
-      color: #fff;
-      padding: 12px 20px;
-      display: block;
-      border-radius: 10px;
-      transition: background 0.3s ease;
-    }
-
-    .sidebar nav ul li a:hover {
-      background-color: #ff007a;
-      box-shadow: 0px 5px 15px rgba(255, 0, 122, 0.5);
-      color: white;
-    }
-
-    .main-content {
-      padding: 40px;
-      overflow-y: auto;
-      background: #22263a;
-    }
-
-    .course-categories {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 20px;
-    }
-
-    .category-btn {
-      background: #181d2a;
-      padding: 8px 20px;
-      border: none;
-      color: #fdbfe6;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background 0.3s, color 0.3s;
-    }
-
-    .category-btn:hover {
-      background: linear-gradient(45deg, #ff007a, #ff3399);
-    }
-
-    .category-btn.active {
-      background: #ff007a;
-      color: #181d2a;
-    }
-
-    .courses {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      /* Fixed minimum size */
-      gap: 20px;
-    }
-
-    .course-card {
-      width: 300px;
-      background: #22263a;
-      padding: 20px;
-      border-radius: 10px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
-      transition: all 0.3s ease;
-    }
-
-    .course-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 4px 20px rgba(255, 0, 122, 0.4);
-    }
-
-    .course-card img {
-      width: 100%;
-      border-radius: 8px;
-      margin-bottom: 10px;
-    }
-
-    .course-card h3 {
-      color: #ff007a;
-      font-size: 20px;
-      margin-bottom: 5px;
-    }
-
-    .course-card p {
-      color: #d6d6d6;
-      font-size: 14px;
-      text-align: center;
-    }
-
-    .course-actions {
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-      margin-top: 10px;
-    }
-
-    .course-actions button {
-      padding: 8px 12px;
-      border: none;
-      border-radius: 4px;
-      font-size: 14px;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-
-    .course-actions button.enroll-btn {
-      background: #0077b6;
-      color: #fbfcfe;
-    }
-
-    .course-actions button.enroll-btn.pending {
-      background: #f39c12;
-      color: #0d1117;
-      cursor: default;
-    }
-
-    .course-actions button.pay-btn {
-      background: #25b2ce;
-      color: #0d1117;
-    }
-
-    .course-actions button:hover {
-      opacity: 0.9;
-    }
-
-    .fav-btn {
-      background: none;
-      border: none;
-      font-size: 80px;
-      /* Increased from 64px to 80px */
-      cursor: pointer;
-      color: #d6d6d6;
-      transition: color 0.3s;
-    }
-
-    /* .fav-btn.liked {
-      font-size: 40px;
-
-      color: #ff007a;
-    } */
-
-    .fav-btn:hover {
-      color: #ff007a;
-    }
-
-    footer {
-      text-align: center;
-      padding: 10px;
-      background: #181d2a;
-      background: linear-gradient(145deg, #021233, #00113a);
-
-      color: #fdbfe6;
-      margin-top: 20px;
-    }
-
-    .logout-btn {
-      background: #f44336;
-      color: white;
-      border: none;
-      padding: 8px 16px;
-      cursor: pointer;
-      border-radius: 6px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-      margin-top: 10px;
-    }
-
-    .logout-btn:hover {
-      background: #d32f2f;
-    }
-  </style>
-
-
-</head>
-
-<body>
-
   
-  <div class="container">
-    <aside class="sidebar">
-
-      <nav>
-        <ul>
-          <li><a href="login.html">Home</a></li>
-          <li><a href="WishList.html">My wishlist</a></li>
-          <li><a href="enrolledcourses.html">EnrolledCourses</a></li>
-          <li><a href="#"><button id="logout-btn" class="logout-btn">Logout</button></a></li>
-        </ul>
-      </nav>
-    </aside>
-
-    <main class="main-content">
-      <div class="search-container">
-        <input type="text" id="search-bar" class="search-input" placeholder="Search for courses...">
-        <button id="search-btn" class="search-btn">🔍</button>
-      </div>
-      <div class="all-courses"></div>
-      <div class="course-categories"></div>
-      <div class="courses"></div>
-    </main>
-  </div>
-  <footer>
-    <p>ALL rights reserved</p>
-  </footer>
 </body>
 
 </html>
