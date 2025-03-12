@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Admin Dashboard - Gamer Mood</title>
+  <title>Admin Dashboard - Course CRUD</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
     /* Reset and Base Styles */
@@ -363,7 +363,7 @@
                     <input type="file" class="asset">
 
                     <!--rmBtn-->
-                    <button onclick="remove(event)" type="button">X</button>
+                    <button onclick="remove(event)" type="button">Delete</button>
 
                 </fieldset>
 
@@ -376,7 +376,7 @@
 
         <!--retrieve the data here-->
         <div id="coursesContainer">
-            <button id="addCourse" onclick="resetForm()">addCourse</button>
+            <button id="addCourse" onclick="resetForm()">Reset</button>
             <h2 style='text-align: center; color: #eee; margin-top: 20px'>Stored Courses</h2>
             <div id="allCourses"></div>
         </div>
@@ -391,6 +391,6 @@
     <p>&copy; 2025 All rights reserved.</p>
   </footer>
   <script type="module" src="./JS/crudCourse.js"></script>
-  <script src="./JS//H_crudCourse/addContent.js"></script>
+  <script src="./JS/H_crudCourse/addContent.js"></script>
 </body>
 </html>
