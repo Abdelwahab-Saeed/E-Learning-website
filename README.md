@@ -28,7 +28,7 @@ This is a full-featured e-learning platform that allows users to enroll in cours
 ### Installation
 1. Clone the repository:
    ```sh
-   git clone https://github.com/your-repo/e-learning-platform.git
+   git clone https://github.com/Abdelwahab-Saeed/E-Learning-website.git
    ```
 2. Open the project folder in a code editor.
 3. Set up Firebase:
