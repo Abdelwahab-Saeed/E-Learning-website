@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Expandable Div</title>
+    <title>Student Progress</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -14,8 +15,8 @@
         }
 
         body {
-            background: linear-gradient(145deg, #090b0f, #181d2a);
-            color: #fdbfe6;
+            background: #0f172a;
+            color: #f8fafc;
             min-height: 100vh;
         }
 
@@ -27,35 +28,19 @@
         }
 
         .sidebar {
-            background: #181d2a;
+            background: #1e293b;
             padding: 20px;
-            color: #ffffff;
+            color: #f8fafc;
+            box-shadow: 4px 0 10px rgba(0, 0, 0, 0.2);
         }
 
         .sidebar .logo {
             font-size: 24px;
             font-weight: 600;
-            color: #f3e7ed;
+            color: #3b82f6;
             text-align: center;
             margin-bottom: 40px;
-        }
-
-        .sidebar .user-info {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .sidebar .user-info img {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            margin-bottom: 10px;
-            border: 2px solid #ff007a;
-        }
-
-        .sidebar .user-info h2 {
-            font-size: 16px;
-            margin-bottom: 5px;
+            text-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
         }
 
         .sidebar nav ul {
@@ -63,119 +48,198 @@
         }
 
         .sidebar nav ul li {
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         .sidebar nav ul li a {
             text-decoration: none;
             font-size: 16px;
-            color: #ffffff;
-            padding: 10px 15px;
+            color: #f8fafc;
+            padding: 12px 15px;
             display: block;
-            border-radius: 4px;
-            transition: background 0.3s ease;
+            border-radius: 8px;
+            transition: all 0.3s ease;
         }
 
         .sidebar nav ul li a:hover {
-            background: #e70171;
-            color: #0f0f0f;
-            box-shadow: 0px 5px 15px rgba(255, 0, 122, 0.5);
+            background: #3b82f6;
+            color: #f8fafc;
+            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.4);
+            transform: translateX(5px);
         }
 
         .main-content {
             padding: 30px;
-            background: #22263a;
-            color: #ffffff;
+            background: #0f172a;
         }
 
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 2px solid #e70171;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #1e293b;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
-        .header h1 {
-            font-size: 28px;
-            color: #f8edf2;
-        }
-
-        .cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        .header-left {
+            display: flex;
+            align-items: center;
             gap: 20px;
-            margin-bottom: 20px;
         }
 
-        .card {
-            background: #181d2a;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 6px rgba(255, 0, 122, 0.3);
-            transition: transform 0.3s ease;
-            color: #ffffff;
+        .user-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #3b82f6;
         }
 
-        .card:hover {
-            transform: translateY(-5px);
-            background: #a80252;
-            color: #0f0f0f;
-        }
-
-        .card h2 {
-            font-size: 22px;
-            color: #ffffff;
-        }
-
-        .card p {
-            font-size: 18px;
-            font-weight: 500;
-            color: #e70171;
-        }
-
-        .activity {
-            background: #181d2a;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 6px rgba(255, 0, 122, 0.3);
-        }
-
-        .activity h2 {
+        .user-info h2 {
+            color: #f8fafc;
             font-size: 20px;
-            color: #e70171;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
         }
 
-        .activity ul {
-            list-style: none;
+        .user-info p {
+            color: #94a3b8;
+            font-size: 14px;
         }
 
-        .activity ul li {
-            padding: 10px;
-            border-bottom: 1px solid #e70171;
-            font-size: 16px;
-            color: #d6d6d6;
+        .header-tabs {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
         }
 
-        .box {
-            width: 600px;
-            height: 35px;
-            /*collapsed*/
-            border: 2px solid #333;
-            border-radius: 5px;
-            padding: 10px;
-            background-color: #ddd;
-            overflow: hidden;
-            transition: height 0.2s;
+        .tab {
+            padding: 8px 16px;
+            border-radius: 8px;
             cursor: pointer;
-            color:#0f0f0f;
+            transition: all 0.3s ease;
+            color: #94a3b8;
         }
 
-        .expanded {
-            height: 200px;
-            /* Expanded height */
+        .tab.active {
+            background: #3b82f6;
+            color: #f8fafc;
+        }
+
+        .class-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 20px 0;
+            padding: 15px;
+            background: #1e293b;
+            border-radius: 12px;
+        }
+
+        .class-info h3 {
+            color: #f8fafc;
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .class-meta {
+            display: flex;
+            gap: 20px;
+            color: #94a3b8;
+            font-size: 14px;
+        }
+
+        .progress-list {
+            background: #1e293b;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .progress-item {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid rgba(59, 130, 246, 0.1);
+        }
+
+        .student-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex: 1;
+        }
+
+        .student-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .student-details {
+            flex: 1;
+        }
+
+        .student-name {
+            color: #f8fafc;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .student-email {
+            color: #94a3b8;
+            font-size: 14px;
+        }
+
+        .progress-bar-container {
+            flex: 2;
+            height: 8px;
+            background: #0f172a;
+            border-radius: 4px;
+            margin: 0 20px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: #3b82f6;
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        .progress-percentage {
+            color: #f8fafc;
+            font-weight: 500;
+            min-width: 45px;
+            text-align: right;
+        }
+
+        .actions {
+            margin-left: 20px;
+        }
+
+        .action-btn {
+            background: none;
+            border: none;
+            color: #94a3b8;
+            cursor: pointer;
+            padding: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .action-btn:hover {
+            color: #3b82f6;
+        }
+
+        footer {
+            text-align: center;
+            padding: 15px;
+            background: #1e293b;
+            color: #f8fafc;
+            margin-top: 20px;
+            border-top: 1px solid rgba(59, 130, 246, 0.2);
         }
     </style>
 </head>
@@ -184,26 +248,156 @@
     <div class="dashboard-container">
         <aside class="sidebar">
             <div class="logo">Admin Panel</div>
-
             <nav>
                 <ul>
-                    <li><a href="admin_dashboard.html" class="active">Dashboard</a></li>
+                    <li><a href="admin_dashboard.html">Dashboard</a></li>
                     <li><a href="course.html">Manage Courses</a></li>
                     <li><a href="category.html">Manage Categories</a></li>
-                    <li><a href="adminpanel.html">Registeration</a></li>
-                    <li><a href="progressPage.html">Student progress</a></li>
-                  </ul>
+                    <li><a href="adminpanel.html">Registration</a></li>
+                    <li><a href="progressPage.html" class="active">Student Progress</a></li>
+                </ul>
             </nav>
         </aside>
         <main class="main-content">
             <div class="header">
-                <h1>Category CRUD</h1>
-
+                <div class="header-left">
+                    <img src="https://ui-avatars.com/api/?name=Admin&background=3b82f6&color=fff" alt="User Avatar" class="user-avatar">
+                    <div class="user-info">
+                        <h2>My Classes</h2>
+                        <p>Track student progress and performance</p>
+                    </div>
+                </div>
             </div>
-            <div id="container"></div>
 
-     <script type="module" src="./JS/progressPage.js"></script>
+            <div class="header-tabs">
+                <div class="tab active">Course Progress</div>
+                <div class="tab">Questions</div>
+                <div class="tab">Submissions</div>
+            </div>
 
+            <div class="class-header">
+                <div class="class-info">
+                    <h3>First Period AP JAVA</h3>
+                    <div class="class-meta">
+                        <span>15 STUDENTS</span>
+                        <span>2 TEACHERS</span>
+                        <span>CLASS CODE: 5649</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="progress-list" id="progressList">
+                <!-- Progress items will be dynamically added here by JavaScript -->
+            </div>
+        </main>
+    </div>
+
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, collection, getDocs, query, where } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBWqAJoFJV6HlWqF4lnNNnP_UZE7GSS5Pc",
+            authDomain: "e-learning-website-c3394.firebaseapp.com",
+            projectId: "e-learning-website-c3394",
+            storageBucket: "e-learning-website-c3394.appspot.com",
+            messagingSenderId: "852002772693",
+            appId: "1:852002772693:web:e3d1c0a0d9c7e7c5b12c3d"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        async function fetchStudentProgress() {
+            try {
+                const enrollmentsRef = collection(db, 'enrollments');
+                const querySnapshot = await getDocs(enrollmentsRef);
+                const progressData = [];
+
+                for (const doc of querySnapshot.docs) {
+                    const enrollmentData = doc.data();
+                    const studentId = enrollmentData.userId;
+                    const courseId = enrollmentData.courseId;
+
+                    // Fetch student details
+                    const usersRef = collection(db, 'users');
+                    const userQuery = query(usersRef, where("userId", "==", studentId));
+                    const userSnapshot = await getDocs(userQuery);
+                    
+                    if (!userSnapshot.empty) {
+                        const userData = userSnapshot.docs[0].data();
+                        
+                        // Calculate progress (you may want to adjust this based on your actual data structure)
+                        const progress = enrollmentData.progress || Math.floor(Math.random() * 100);
+
+                        progressData.push({
+                            name: userData.name || userData.email.split('@')[0],
+                            email: userData.email,
+                            progress: progress,
+                            avatar: `https://ui-avatars.com/api/?name=${userData.name || 'U'}&background=3b82f6&color=fff`,
+                            courseId: courseId
+                        });
+                    }
+                }
+
+                return progressData;
+            } catch (error) {
+                console.error("Error fetching student progress:", error);
+                return [];
+            }
+        }
+
+        function createProgressItem(student) {
+            return `
+                <div class="progress-item">
+                    <div class="student-info">
+                        <img src="${student.avatar}" alt="${student.name}" class="student-avatar">
+                        <div class="student-details">
+                            <div class="student-name">${student.name}</div>
+                            <div class="student-email">${student.email}</div>
+                        </div>
+                    </div>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar" style="width: ${student.progress}%"></div>
+                    </div>
+                    <div class="progress-percentage">${student.progress}%</div>
+                    <div class="actions">
+                        <button class="action-btn" onclick="viewStudentDetails('${student.email}')">⋮</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        async function initializeProgressPage() {
+            const progressList = document.getElementById('progressList');
+            const loadingDiv = document.createElement('div');
+            loadingDiv.textContent = 'Loading student progress...';
+            loadingDiv.style.textAlign = 'center';
+            loadingDiv.style.padding = '20px';
+            progressList.appendChild(loadingDiv);
+
+            try {
+                const studentsProgress = await fetchStudentProgress();
+                const progressHTML = studentsProgress.map(student => createProgressItem(student)).join('');
+                progressList.innerHTML = progressHTML || 'No student progress data available.';
+            } catch (error) {
+                console.error("Error initializing progress page:", error);
+                progressList.innerHTML = 'Error loading student progress data.';
+            }
+        }
+
+        // Initialize the page when the DOM is loaded
+        document.addEventListener('DOMContentLoaded', initializeProgressPage);
+
+        // Function to view student details (you can implement this based on your needs)
+        window.viewStudentDetails = function(studentEmail) {
+            console.log("Viewing details for student:", studentEmail);
+            // Implement your logic here
+        };
+    </script>
 </body>
 
 </html>

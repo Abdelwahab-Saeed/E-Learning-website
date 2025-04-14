@@ -3,51 +3,50 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Admin Dashboard - Course CRUD</title>
+  <title>Manage Courses</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
-    /* Reset and Base Styles */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
       font-family: 'Poppins', sans-serif;
     }
+  
     body {
-      /* A subtle white to very light pink gradient */
-      background: linear-gradient(145deg, #ffffff, #fff0f5);
+      background: #0f172a;
+      color: #f8fafc;
       min-height: 100vh;
-      color: #333;
     }
-    /* Dashboard Layout */
+  
     .dashboard-container {
       display: grid;
-      grid-template-columns: 260px auto;
+      grid-template-columns: 250px auto;
       width: 100%;
       min-height: 100vh;
     }
-    /* Sidebar Styles */
+  
     .sidebar {
-      background: #181d2a;
+      background: #1e293b;
       padding: 20px;
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-
-
+      color: #f8fafc;
+      box-shadow: 4px 0 10px rgba(0, 0, 0, 0.2);
     }
+  
     .sidebar .logo {
-      font-size: 26px;
+      font-size: 24px;
       font-weight: 600;
-      color: #fff;
+      color: #3b82f6;
       text-align: center;
       margin-bottom: 40px;
+      text-shadow: 0 0 10px #3b82f680;
     }
+  
     .sidebar .user-info {
       text-align: center;
       margin-bottom: 40px;
     }
+  
     .sidebar .user-info img {
       width: 80px;
       height: 80px;
@@ -55,96 +54,110 @@
       margin-bottom: 10px;
       border: 2px solid #fff;
     }
+  
     .sidebar .user-info h2 {
       font-size: 18px;
       margin-bottom: 5px;
       color: #fff;
     }
+  
     .sidebar nav ul {
       list-style: none;
-      width: 100%;
     }
+  
     .sidebar nav ul li {
-      margin-bottom: 20px;
+      margin-bottom: 15px;
     }
+  
     .sidebar nav ul li a {
-      display: block;
       text-decoration: none;
       font-size: 16px;
-      color: #fff;
-      padding: 10px 15px;
-      border-radius: 4px;
-      transition: background 0.3s ease;
+      color: #f8fafc;
+      padding: 12px 15px;
+      display: block;
+      border-radius: 8px;
+      transition: all 0.3s ease;
     }
-    .sidebar nav ul li a:hover,
-    .sidebar nav ul li a.active {
-      background: #ff85a1; /* A slightly lighter pink on hover */
-      color: #fff;
+  
+    .sidebar nav ul li a:hover {
+      background: #3b82f6;
+      color: #f8fafc;
+      box-shadow: 0 5px 15px rgba(59, 130, 246, 0.4);
+      transform: translateX(5px);
     }
-    /* Main Content Styles */
+  
     .main-content {
       padding: 30px;
-      background: #fff;
-      min-height: 100vh;
+      background: #0f172a;
     }
+  
     .header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-bottom: 2px solid #e50474;
-      margin-bottom: 20px;
-      padding-bottom: 10px;
+      margin-bottom: 30px;
+      padding-bottom: 15px;
+      border-bottom: 2px solid #3b82f6;
     }
+  
     .header h1 {
+      color: #3b82f6;
       font-size: 28px;
-      color: #220212;
+      text-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
     }
-    /* Activity Section */
+  
     .activity {
       background: #fff;
       padding: 20px;
       border-radius: 8px;
-      border: 1px solid #ff69b4;
+      border: 1px solid #3b82f680;
       margin-bottom: 20px;
     }
+  
     .activity h2 {
       font-size: 20px;
       color: #ff69b4;
       margin-bottom: 10px;
     }
+  
     .activity ul {
       list-style: none;
     }
+  
     .activity ul li {
       padding: 10px;
       border-bottom: 1px solid #ff69b4;
       font-size: 16px;
       color: #333;
     }
+  
     .activity ul li:last-child {
       border-bottom: none;
     }
-    /* Page Container */
+  
     #container {
       display: flex;
       justify-content: center;
       gap: 20px;
       margin-bottom: 30px;
     }
-    /* Form Styles */
+  
     #container form {
       padding: 20px;
       width: 500px;
-      background: #fff;
+      background: #fefefe;
       border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(255, 105, 180, 0.3);
+      border: 1px solid #3b82f6;
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
     }
+  
     #container form label {
       margin-bottom: 5px;
       display: block;
       font-weight: 500;
-      color: #000000;
+      color: #0f172a;
     }
+  
     #container form input,
     #container form textarea,
     #container form select {
@@ -152,30 +165,48 @@
       padding: 8px;
       margin-bottom: 15px;
       border-radius: 10px;
-      border: 1px solid #141112;
-      background: #fff;
-      color: #333;
+      border: 1px solid #3b82f6;
+      background: #fffaf0;
+      color: #0f172a;
     }
+  
     #container form textarea {
       resize: vertical;
       height: 100px;
     }
-    /* Content Container within Form */
+  
     #ContentContainer {
       margin-top: 20px;
     }
+  
     #ContentContainer .lessonForm {
-      background: #fff;
-      border: 1px solid #ff69b4;
+      background: #fefefe;
+      border: 1px solid #3b82f6;
       border-radius: 8px;
-      padding: 10px;
+      padding: 15px;
       margin-bottom: 15px;
+      box-shadow: 0 2px 8px rgba(59, 130, 246, 0.1);
     }
+  
     #ContentContainer .lessonForm label {
       font-size: 14px;
-      color: #10060b;
+      color: #0f172a;
     }
-    /* Buttons */
+  
+    .lessonForm button {
+      background-color: #3b82f6;
+      color: #fff;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+  
+    .lessonForm button:hover {
+      background-color: #2563eb;
+    }
+  
     #mainBtn,
     #addCourse,
     #addLessonBtn,
@@ -185,17 +216,20 @@
       border-radius: 10px;
       transition: background 0.3s ease;
     }
+  
     #mainBtn {
-      background-color: #fab7d8;
+      background-color: #3b82f6;
       color: #fff;
       font-size: 18px;
       height: 40px;
       width: 100%;
       margin-top: 10px;
     }
+  
     #mainBtn:hover {
-      background-color: #ff85a1;
+      background-color: #2563eb;
     }
+  
     #addCourse {
       display: flex;
       justify-content: center;
@@ -204,29 +238,31 @@
       height: 100px;
       font-size: x-large;
       margin-top: 10px;
-      background-color: #ffa8d2;
-      color: #221818;
-      border-radius: 10px;
+      background-color: #3b82f6;
+      color: #fff;
     }
+  
     #addCourse:hover {
-      background-color: #ff85a1;
+      background-color: #2563eb;
     }
+  
     #addCourse:active {
-      background-color: #fff;
-      color: #ff69b4;
+      background-color: #1e40af;
+      color: #e0e7ff;
       transform: scale(0.95);
     }
-    /* Courses Container */
+  
     #coursesContainer {
       display: flex;
       flex-direction: column;
       align-items: center;
       width: 500px;
-      background-color: #fff;
+      background-color: #fefefe;
       padding: 20px;
       border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(255, 105, 180, 0.3);
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
     }
+  
     #allCourses {
       width: 100%;
       background-color: #fff;
@@ -234,24 +270,26 @@
       border-radius: 10px;
       margin-top: 15px;
     }
-    /* Delete and Update Buttons */
+  
     #delBtn {
       width: 50px;
-      background-color: #ff69b4;
+      background-color: #3b82f6;
       border: none;
       border-radius: 10px;
       color: #fff;
       font-weight: bold;
       cursor: pointer;
     }
+  
     #delBtn:hover {
-      background-color: #ff85a1;
+      background-color: #2563eb;
     }
+  
     #updateBtn {
       display: none;
       justify-content: center;
       align-items: center;
-      background-color: #ff69b4;
+      background-color: #3b82f6;
       color: #fff;
       font-size: x-large;
       height: 40px;
@@ -259,7 +297,7 @@
       border-radius: 20px;
       cursor: pointer;
     }
-    /* Course Card */
+  
     .course-card {
       border-radius: 10px;
       background-color: #fff;
@@ -267,18 +305,19 @@
       margin: 10px 0;
       display: flex;
       gap: 10px;
-      border: 1px solid #ff69b4;
+      border: 1px solid #3b82f680;
     }
-    /* Footer */
+  
     footer {
       text-align: center;
-      padding: 10px;
-      background: #fab7d8;
-      color: #fff;
+      padding: 15px;
+      background: #1e293b;
+      color: #f8fafc;
       margin-top: 20px;
+      border-top: 1px solid rgba(59, 130, 246, 0.2);
     }
   </style>
-</head>
+  </head>
 <body>
   <div class="dashboard-container">
     <aside class="sidebar">

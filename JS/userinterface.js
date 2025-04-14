@@ -487,3 +487,4 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase
 }
 
     document.getElementById('logout-btn').addEventListener('click', logout);
+

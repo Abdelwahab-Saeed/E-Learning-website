@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard UI Clone - Gamer Mode</title>
+  <title>E-Learning Platform</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
   
   <style>
@@ -16,141 +16,163 @@
     }
 
     body {
-      background: linear-gradient(145deg, #021233, #00113a);
-      color: #fdbfe6;
-      height: 10px;
-      min-height: 10vh;
+      background: #1e293b;
+      color: #f8fafc;
+      min-height: 100vh;
     }
 
-    /* .container {
-      display: grid;
-      grid-template-columns: 250px auto;
+    nav {
+      background: #0f172a;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      position: fixed;
       width: 100%;
-      height: 90vh;
-      border-radius: 15px;
-      overflow: hidden;
-      background: #22263a;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-      transition: all 0.3s ease-in-out;
-    } */
-
-    .container:hover {
-      transform: scale(1.02);
+      top: 0;
+      z-index: 1000;
     }
 
-    .sidebar {
-      background: #0d1d35;
-      padding: 30px 20px;
-      color: #fff;
-      box-shadow: 5px 0 15px rgba(0, 0, 0, 0.5);
+    nav .logo {
+      color: #3b82f6;
+      font-size: 24px;
+      font-weight: 600;
+    }
+
+    .nav-links {
       display: flex;
-      flex-direction: column;
+      gap: 20px;
       align-items: center;
     }
 
-    .sidebar .user-info {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-bottom: 40px;
-      text-align: center;
+    nav a {
+      color: #1e293b;
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      font-weight: 500;
     }
 
+    nav a:hover {
+      color: #3b82f6;
+      background: rgba(59, 130, 246, 0.1);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 80px auto 0;
+      padding: 0 20px;
+    }
+
+    .hero {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 60px 0;
+      gap: 40px;
+    }
+
+    .hero-content {
+      flex: 1;
+    }
+
+    .hero h1 {
+      font-size: 48px;
+      font-weight: 600;
+      color: #0f172a;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    .hero p {
+      font-size: 18px;
+      color: #64748b;
+      margin-bottom: 30px;
+      line-height: 1.6;
+    }
+
+    .stats {
+      display: flex;
+      gap: 40px;
+      margin-top: 40px;
+    }
+
+    .stat-item {
+      text-align: left;
+    }
+
+    .stat-number {
+      font-size: 36px;
+      font-weight: 600;
+      color: #3b82f6;
+      margin-bottom: 8px;
+    }
+
+    .stat-label {
+      color: #64748b;
+      font-size: 16px;
+    }
+
+    .hero-image {
+      flex: 1;
+      max-width: 500px;
+    }
+
+    .hero-image img {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
 
     .search-container {
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+      margin: 40px 0;
       display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 5px;
-      margin: 20px auto;
-      max-width: 900px;
-      background: #2b2f3d;
-      border-radius: 15px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      gap: 15px;
     }
 
     .search-input {
       flex: 1;
-      padding: 10px;
-      border: none;
-      border-radius: 20px;
-      outline: none;
+      padding: 12px 20px;
+      border: 2px solid #e2e8f0;
+      border-radius: 8px;
       font-size: 16px;
-      background: #181d2a;
-      color: #fdbfe6;
+      transition: all 0.3s ease;
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
     }
 
     .search-btn {
-      background: #096ae9;
+      background: #3b82f6;
       color: white;
       border: none;
-      border-radius: 50%;
-      padding: 8px 12px;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: 500;
       cursor: pointer;
-      margin-left: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
     }
 
     .search-btn:hover {
-      background: #418ce2;
-    }
-
-
-    .sidebar .user-info img {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      margin-bottom: 10px;
-      border: 2px solid #ecf0f1;
-    }
-
-    .sidebar .user-info h2 {
-      font-size: 16px;
-      margin-bottom: 5px;
-    }
-
-    .sidebar .user-info p {
-      font-size: 14px;
-      color: #ffffff;
-    }
-
-    .sidebar nav ul {
-      list-style: none;
-      padding: 0;
-      width: 100%;
-    }
-
-    .sidebar nav ul li {
-      margin-bottom: 20px;
-    }
-
-    .sidebar nav ul li a {
-      text-decoration: none;
-      font-size: 16px;
-      color: #fff;
-      padding: 12px 20px;
-      align-items: center;
-      display: block;
-      border-radius: 10px;
-      transition: background 0.3s ease;
-    }
-
-    .sidebar nav ul li a:hover {
-      background-color: #ff007a;
-      box-shadow: 0px 5px 15px rgba(255, 0, 122, 0.5);
-      color: white;
-    }
-
-    .main-content {
-      padding: 40px;
-      overflow-y: auto;
-      background: #0e162e;
+      background: #2563eb;
+      transform: translateY(-2px);
     }
 
     .course-categories {
       display: flex;
       gap: 10px;
-      margin-bottom: 20px;
+      margin: 30px 0;
+      flex-wrap: wrap;
     }
 
     .category-btn {
@@ -160,7 +182,7 @@
       color: #fdbfe6;
       border-radius: 5px;
       cursor: pointer;
-      transition: background 0.3s, color 0.3s;
+      transition: all 0.3s ease;
     }
 
     .category-btn:hover {
@@ -194,7 +216,7 @@
 
     .course-card:hover {
       transform: translateY(-5px);
-      box-shadow: 0 4px 20px rgba(255, 0, 122, 0.4);
+      box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);
     }
 
     .course-card img {
@@ -262,99 +284,56 @@
       transition: color 0.3s;
     }
 
-    /* .fav-btn.liked {
-      font-size: 40px;
-
-      color: #ff007a;
-    } */
-
-    .fav-btn:hover {
-      color: #ff007a;
+    .course-price {
+      font-weight: 600;
+      color: #3b82f6;
     }
 
     footer {
-      text-align: center;
-      padding: 10px;
-      background: #181d2a;
-      background: linear-gradient(145deg, #021233, #00113a);
-
-      color: #fdbfe6;
-      margin-top: 20px;
+      background: #1e293b;
+      color: #f8fafc;
+      padding: 40px 0;
+      margin-top: 60px;
     }
 
-    .logout-btn {
-      background: #be291f;
-      color: white;
-      border: none;
-      padding: 8px 16px;
-      cursor: pointer;
-      border-radius: 6px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-      margin-top: 10px;
+    footer .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 0;
     }
 
-    .logout-btn:hover {
-      background: #EC8305;
+    .footer-links {
+      display: flex;
+      gap: 30px;
     }
 
+    footer a {
+      color: #f8fafc;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
 
+    footer a:hover {
+      color: #3b82f6;
+    }
 
+    .primary-btn {
+      background: #3b82f6;
+      color: #ffffff;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: 500;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.3s ease;
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            background: #f9f9f9;
-        }
-        nav {
-            background: #4CAF50;
-            padding: 1rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: white;
-        }
-        nav a {
-            color: white;
-            text-decoration: none;
-            padding: 0 15px;
-            font-weight: bold;
-        }
-        nav a:hover {
-            text-decoration: underline;
-        }
-        .container {
-            padding: 20px;
-            text-align: center;
-        }
-        .hero {
-            padding: 50px;
-            background: #eee;
-            border-radius: 12px;
-        }
-        .hero h1 {
-            color: #333;
-        }
-        .hero p {
-            color: #555;
-        }
+    .primary-btn:hover {
+      background: #2563eb;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(59, 130, 246, 0.4);
+    }
   </style>
 
 
@@ -370,8 +349,9 @@
     <div class="nav-links">
         <a href="#home">Home</a>
         <a href="#courses">Courses</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
+        <a href="WishList.html">My Wishlist</a>
+        <a href="enrolledcourses.html">My Courses</a>
+        <a href="#" id="logout-btn">Logout</a>
     </div>
 </nav>
 
@@ -396,28 +376,56 @@
   
   <div class="container" id="home">
     <div class="hero">
-        <h1>Welcome to eLearning Platform</h1>
-        <p>Explore our courses and boost your knowledge today!</p>
+        <div class="hero-content">
+            <h1>Start learning & define your future</h1>
+            <p>Access a vast library of courses taught by expert instructors and take your skills to the next level.</p>
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Expert Instructors</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">100+</div>
+                    <div class="stat-label">Online Courses</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">250+</div>
+                    <div class="stat-label">Active Students</div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80" alt="Learning">
+        </div>
     </div>
 
-    <main class="main-content">
-      <div class="search-container">
+    <div class="search-container">
         <input type="text" id="search-bar" class="search-input" placeholder="Search for courses...">
-        <button id="search-btn" class="search-btn">🔍</button>
-      </div>
-      <div class="all-courses"></div>
-      <div class="course-categories"></div>
-      <div class="courses"></div>
-    </main>
+        <button id="search-btn" class="search-btn">Search</button>
+    </div>
+
+    <div class="course-categories" id="courseCategories">
+        <!-- Categories will be dynamically added here -->
+    </div>
+
+    <div class="courses" id="coursesList">
+        <!-- Courses will be dynamically added here -->
+    </div>
   </div>
   <footer>
-    <p>ALL rights reserved</p>
+    <div class="container">
+        <p>© 2024 eLearning Platform. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="#about">About Us</a>
+            <a href="#contact">Contact</a>
+            <a href="#privacy">Privacy Policy</a>
+            <a href="#terms">Terms of Service</a>
+        </div>
+    </div>
   </footer>
 
-  <script type="module" src="./JS/userinterface.js">
-    
-  </script>
-  
+<script type="module" src="JS/userinterface.js"></script>
+
 </body>
 
 </html>
