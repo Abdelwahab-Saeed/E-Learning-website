@@ -40,7 +40,7 @@ overflow: hidden;
 .right {
     flex: 2;
       padding: 40px;
-    background: #131b3a;
+    background: #0e162e;
 }
 
 
@@ -60,9 +60,9 @@ overflow: hidden;
 
 .input-group input,
 .input-group select {
-    width: 100%;
+    width: 90%;
     padding: 14px;
-    border: 2px solid #0099ff;
+    border: 2px solid #025e9b;
       background: #0a0f29;
     color: #fff;
     border-radius: 5px;
@@ -81,8 +81,13 @@ overflow: hidden;
     padding: 5px;
 }
 
+.registerbtn{
+    text-align: center;
+    align-items: center;
+}
+
 .register-btn {
-    width: 100%;
+    width: 30%;
     padding: 12px;
     background: linear-gradient(to right, #0099ff, #0066cc);
     color: white;

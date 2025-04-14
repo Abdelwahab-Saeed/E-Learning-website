@@ -22,7 +22,7 @@
       min-height: 10vh;
     }
 
-    .container {
+    /* .container {
       display: grid;
       grid-template-columns: 250px auto;
       width: 100%;
@@ -32,14 +32,14 @@
       background: #22263a;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
       transition: all 0.3s ease-in-out;
-    }
+    } */
 
     .container:hover {
       transform: scale(1.02);
     }
 
     .sidebar {
-      background: #181d2a;
+      background: #0d1d35;
       padding: 30px 20px;
       color: #fff;
       box-shadow: 5px 0 15px rgba(0, 0, 0, 0.5);
@@ -129,6 +129,7 @@
       font-size: 16px;
       color: #fff;
       padding: 12px 20px;
+      align-items: center;
       display: block;
       border-radius: 10px;
       transition: background 0.3s ease;
@@ -143,7 +144,7 @@
     .main-content {
       padding: 40px;
       overflow-y: auto;
-      background: #22263a;
+      background: #0e162e;
     }
 
     .course-categories {
@@ -175,13 +176,14 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       /* Fixed minimum size */
-      gap: 20px;
+      gap: 10px;
     }
 
     .course-card {
       width: 300px;
-      background: #22263a;
-      padding: 20px;
+      height: 400px;
+      background: #24293f;
+      padding: 10px;
       border-radius: 10px;
       display: flex;
       flex-direction: column;
@@ -197,6 +199,7 @@
 
     .course-card img {
       width: 100%;
+      height: 40%;
       border-radius: 8px;
       margin-bottom: 10px;
     }
@@ -280,7 +283,7 @@
     }
 
     .logout-btn {
-      background: #f44336;
+      background: #be291f;
       color: white;
       border: none;
       padding: 8px 16px;
@@ -291,8 +294,67 @@
     }
 
     .logout-btn:hover {
-      background: #d32f2f;
+      background: #EC8305;
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background: #f9f9f9;
+        }
+        nav {
+            background: #4CAF50;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0 15px;
+            font-weight: bold;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            padding: 20px;
+            text-align: center;
+        }
+        .hero {
+            padding: 50px;
+            background: #eee;
+            border-radius: 12px;
+        }
+        .hero h1 {
+            color: #333;
+        }
+        .hero p {
+            color: #555;
+        }
   </style>
 
 
@@ -301,18 +363,42 @@
 <body>
 
   
-  <div class="container">
-    <aside class="sidebar">
 
-      <nav>
+
+  <nav>
+    <div class="logo">eLearning</div>
+    <div class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#courses">Courses</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+    </div>
+</nav>
+
+
+
+  <!-- <div class="container">
+    <!-- <aside class="sidebar"> -->
+
+      <!-- <nav>
         <ul>
-          <li><a href="login.html">Home</a></li>
+          <li><a href="userinterface.html">Home</a></li>
           <li><a href="WishList.html">My wishlist</a></li>
           <li><a href="enrolledcourses.html">EnrolledCourses</a></li>
           <li><a href="#"><button id="logout-btn" class="logout-btn">Logout</button></a></li>
         </ul>
-      </nav>
-    </aside>
+      </nav> -->
+    <!-- </aside> -->
+
+
+  
+
+  
+  <div class="container" id="home">
+    <div class="hero">
+        <h1>Welcome to eLearning Platform</h1>
+        <p>Explore our courses and boost your knowledge today!</p>
+    </div>
 
     <main class="main-content">
       <div class="search-container">

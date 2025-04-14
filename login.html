@@ -11,7 +11,6 @@
 
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
-
       * {
         padding: 0;
         margin: 0;
@@ -19,8 +18,7 @@
         font-family: "Poppins", sans-serif;
       }
 
-      html,
-      body {
+      html, body {
         height: 100%;
       }
 
@@ -28,136 +26,139 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: #0a0f29;
+        background: url('./images/background.png') no-repeat center center/cover;
+        overflow: hidden;
+      }
+
+      .background {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: url('./images/background.png') no-repeat center center/cover;
+        z-index: -1;
       }
 
       .loginBox {
-        background-color: #131b3a;
-        border: 2px solid #00c3ff;
+        background-color: rgba(19, 27, 58, 0.9);
+        border: 2px solid #025a75c4;
         border-radius: 15px;
         width: 600px;
-        height: 600px;
-        padding-top: 80px;
-        background: linear-gradient(145deg, #0e162e, #0e162e);
         padding: 40px;
-        text-shadow: 0 0 5px #0099ff;
-        box-shadow: 0 0 15px rgba(0, 153, 255, 0.5);
+        box-shadow: 0 0 30px rgba(0, 153, 255, 0.5);
+        /* text-align: center; */
       }
 
       .loginBox h1 {
+        color: #ebf1f3;
         text-align: center;
-        color: #00c3ff;
-        text-shadow: 0 0 5px #00c3ff;
-      }
-
-      .loginBox form {
-        margin: 20px;
-        padding: 10px;
+        margin-bottom: 20px;
+        text-shadow: 0 0 10px #00afe4a6;
       }
 
       .userBox {
-        margin: 10px;
-        display: flex;
-        align-items: center;
+        margin: 20px 0;
         position: relative;
       }
 
       .userBox input {
         width: 100%;
-        padding: 14px;
-        margin: 3px;
-        border: 2px solid #0099ff;
+        padding: 14px 50px;
+        border: 2px solid #056aade7;
         background: #0a0f29;
-        color: #fff;
+        color: white;
         border-radius: 5px;
+        outline: none;
         font-size: 16px;
         box-shadow: 0 0 10px rgba(0, 153, 255, 0.5);
-        outline: none;
-        padding-left: 40px;
       }
 
       .userBox input:focus {
-        border-color: #00c3ff;
-        box-shadow: 0 0 15px rgba(0, 195, 255, 0.7);
+        border-color: #fcfeff;
+        box-shadow: 0 0 20px rgba(0, 195, 255, 0.7);
       }
 
       .userBox i {
-        font-size: 20px;
-        color: #00c3ff;
         position: absolute;
-        left: 14px;
+        left: 20px;
         top: 50%;
         transform: translateY(-50%);
-      }
-
-      .loginBox label {
+        color: #edf4f7ef;
         font-size: 20px;
-        color: #00c3ff;
-        margin-bottom: 5px;
-        padding-left: 14px;
       }
 
-      .remember {
-        margin-left: 15px;
-        margin-top: 15px;
-        font-size: 20px;
-        color: #00c3ff;
-      }
+      label[for="email"] {
+  font-size: 15px; 
+  text-align: right;        
+  color: #f1f5f7ea;      
+  font-weight: bold;        
+  text-transform: uppercase; }
 
-      .login-btn-container {
-        text-align: center;
-      }
+  label[for="password"] {
+    padding:1;
+  font-size: 15px; 
+  text-align: right;        
+  color: #f1f5f7ea;      
+  font-weight: bold;        
+  text-transform: uppercase; }
+
+ 
+  .remember{
+    font-size: 15px; 
+  text-align: left;        
+  color: #ffffffd5;      
+  font-weight: bold;        
+  }
+
 
       .login-btn {
         width: 100%;
         padding: 12px;
-        background: linear-gradient(to right, #0099ff, #0066cc);
+        background: linear-gradient(to right, #025085, #0066cc);
         color: white;
         border: none;
         border-radius: 5px;
-        font-size: 16px;
+        font-size: 18px;
         cursor: pointer;
-        margin-top: 10px;
-        text-transform: uppercase;
-        box-shadow: 0 0 15px rgba(0, 153, 255, 0.8);
-        transition: all 0.3s ease-in-out;
+        margin-top: 20px;
+        box-shadow: 0 0 15px rgba(1, 122, 202, 0.342);
+        transition: 0.3s;
       }
 
       .login-btn:hover {
-        background: linear-gradient(to right, #00c3ff, #0099ff);
-        box-shadow: 0 0 20px rgba(0, 195, 255, 1);
+        background: linear-gradient(to right, #028fb9, #0377c5);
+        box-shadow: 0 0 25px rgb(0, 35, 46);
         transform: scale(1.05);
       }
 
       .register-text {
+        margin-top: 20px;
+        font-size: 18px;
+        color: #f5f7f8de;
         text-align: center;
-        margin-top: 15px;
-        font-size: 20px;
-        color: #00c3ff;
       }
 
       .register-text a {
-        color: #00c3ff;
+        color: #00afe4e3;
         text-decoration: none;
+        text-align: center;
       }
 
       .register-text a:hover {
         text-decoration: underline;
-        color: #0099ff;
       }
 
       .error {
         color: red;
         font-size: 16px;
-      }
-    </style>
+      }  
+        </style>
   </head>
 
   <body>
     <div class="loginBox">
       <h1>Login</h1>
       <form id="loginForm">
-        <label for="email">Email *</label>
+        <label for="email">Email</label>
         <div class="userBox">
           <input
             type="email"
@@ -169,7 +170,7 @@
         </div>
         <div id="emailError" class="error"></div>
 
-        <label for="password">Password *</label>
+        <label for="password">Password</label>
         <div class="userBox">
           <input
             type="password"
